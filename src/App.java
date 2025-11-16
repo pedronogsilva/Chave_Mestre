@@ -12,13 +12,15 @@ In this version, we have to implement:
 -Tipo variavel;
 -long;
 -random;
+-file handling;
+-"infinite" matrix;
 
 I go to the bathroom fazer pipi.
 */
 
 import java.util.Scanner;
 
-public class App {
+public class App { 
 
     static void AddPassword() {
         System.out.println("add");
