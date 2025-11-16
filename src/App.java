@@ -3,9 +3,10 @@ This code consists of a password manger app via Command Line Interface.
 Starting Date: 15/11/2025 - Finish Date: "ongoing"
 
 Versions: 0.1 - Initial version. 15/11/2025
+Versions: 0.1.2 - Initial version. 16/11/2025
 In this version, we have to implement:
 -Matrizes;
--If;
+-If;✓
 -For;
 -While; ✓
 -Functions; ✓
@@ -23,15 +24,18 @@ import java.io.File;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.lang.model.type.NullType;
 
 
 public class App { 
     static File MatrixJson = new File("PassWords.json");
     static Scanner Scanner = new Scanner(System.in);
+    static String UserEmail = "";
+    static String PassWord = "";
 
     
     static void Start() {
-        MatrixJson.createNewFile();
+        //MatrixJson.createNewFile();
 
     }
 
@@ -40,44 +44,56 @@ public class App {
     }
 
     static void AddPassword() {
-        //Open the menu the adding and ask app or site
-        System.out.println("---------------Adding Password---------------\n");
-        System.out.printf("What is the app or website\n->");
-        String AppSite = Scanner.nextLine();
+        String AppSite = "";
+
+
+        while (AppSite == "") {
+            //Open the menu the adding and ask app or site
+            ClearScreen();
+            System.out.println("---------------Adding Password---------------\n");
+            System.out.printf("What is the app or website\n->");
+            AppSite = Scanner.nextLine();
+        }
 
         //Ask waht type login is, it´s username.. or quick login
         ClearScreen();
-        System.out.println("---------------Adding Password---------------\n");
+        System.out.printf("---------------Adding Password---------------\n");
         System.out.printf("What type of login?\n1- Username/Email, Password\n2- Google, Facebook, etc\n->");
         int TypeLogin = Scanner.nextInt();
         
         switch (TypeLogin) {
             case 1:
                 //ask the username or email for login and save in "UserEmail"
-                ClearScreen();
-                System.out.println("---------------Adding Password---------------\n");
-                System.out.printf("Username/Email:\n->");
-                String UserEmail = Scanner.nextLine();
+                while (UserEmail == "") {
+                    ClearScreen();
+                    System.out.printf("---------------Adding Password---------------\n");
+                    System.out.printf("Username/Email:\n->");
+                    UserEmail = Scanner.nextLine();
 
-                //Ask the password and save in "PassWord"
-                System.out.printf("Password:\n->");
-                String PassWord = Scanner.nextLine();
+                    //Ask the password and save in "PassWord"
+                    if (UserEmail != "" && PassWord == "") {
+                        System.out.printf("Password:\n->");
+                        PassWord = Scanner.nextLine();
+                    } 
+                }
 
                 break;
+
             case 2:
                 //Ask the quick login and save in the "PassWord"
-                ClearScreen();
-                System.out.println("---------------Adding Password---------------\n");
-                System.out.printf("What's the quick login?\n->");
-                PassWord = Scanner.nextLine();
+                while (PassWord == "") {
+                    ClearScreen();
+                    System.out.printf("---------------Adding Password---------------\n");
+                    System.out.printf("What's the quick login?\n->");
+                    PassWord = Scanner.nextLine();
+                }
 
                 break;
+
             default:
                 System.out.printf("Invalid Option! Please try again.\n");
                 break;
         }
-
-        
     }
 
     static void ViewPassword() {
@@ -85,12 +101,26 @@ public class App {
 
     }
 
-    static void DelPassword() {
-        System.out.println("---------------Edit Password---------------\n");
+    static void EditPassword() { //DON´T WORKING
+        int EditID = 0;
 
+        while (EditID == 0) {
+            //Ask what ID whant edit, charge for ID and not user/email or password
+            ClearScreen();
+            System.out.printf("---------------Edit Password---------------\n");
+            System.out.printf("Qual Password quer editar, ID?\n->");
+            EditID = Scanner.nextInt();
+            System.out.println(EditID);
+        
+            //Change the old password for the new password
+            ClearScreen();
+            System.out.printf("---------------Edit Password---------------\n");
+            System.out.printf("Password:\n->");
+            PassWord = Scanner.nextLine();
+        }
     }
 
-    static void EditPassword() {
+    static void DelPassword() {
         System.out.println("---------------Delete Password---------------\n");
 
     }
