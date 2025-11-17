@@ -19,24 +19,31 @@ In this version, we have to implement:
 I go to the bathroom fazer pipi.
 */
 
+//import of all the libraries needed for the project
 import java.util.Scanner;
 import java.io.File;
-import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import javax.lang.model.type.NullType;
+// import com.google.gson.Gson;
 
 
 public class App { 
-    static File MatrixJson = new File("PassWords.json");
+    static File DBFile = new File("PassWords.json");
+    static int MaxSize;//the maximum size of the matrix on this exact instance of the code since the maximum amount of passowrd is dynamic. 
+
     static Scanner Scanner = new Scanner(System.in);
+    static String AppSite = "";
     static String UserEmail = "";
     static String PassWord = "";
+    static int EditID = 0; //temp
+    static int DelPassword = 0;
 
     
     static void Start() {
-        //MatrixJson.createNewFile();
-
+        //check if the DB file exists, if it does, copies it and adds 10 slots to the matrix, if it doesn't creates it
+        
     }
 
     static void SavePassword() {
@@ -44,8 +51,6 @@ public class App {
     }
 
     static void AddPassword() {
-        String AppSite = "";
-
 
         while (AppSite == "") {
             //Open the menu the adding and ask app or site
@@ -101,32 +106,48 @@ public class App {
 
     }
 
-    static void EditPassword() { //DON´T WORKING
-        int EditID = 0;
+    static void EditPassword() {
 
         while (EditID == 0) {
-            //Ask what ID whant edit, charge for ID and not user/email or password
+            //Ask what ID whant to edit, change for ID and not user/email or password
             ClearScreen();
             System.out.printf("---------------Edit Password---------------\n");
-            System.out.printf("Qual Password quer editar, ID?\n->");
+            System.out.printf("Choose the ID of the Password you wish to edit.\n->");
             EditID = Scanner.nextInt();
-            System.out.println(EditID);
-        
-            //Change the old password for the new password
-            ClearScreen();
-            System.out.printf("---------------Edit Password---------------\n");
-            System.out.printf("Password:\n->");
-            PassWord = Scanner.nextLine();
+            
+            if (EditID >= 0) { 
+                //Change the old password for the new password
+                ClearScreen();
+                System.out.printf("---------------Edit Password---------------\n");
+                System.out.printf("Password:\n->");
+                Scanner.nextLine();
+                PassWord = Scanner.nextLine();
+            }
         }
     }
 
     static void DelPassword() {
-        System.out.println("---------------Delete Password---------------\n");
 
+        while (EditID == 0) {
+            //Ask what ID whant to delete
+            ClearScreen();
+            System.out.printf("---------------Delete Password---------------\n");
+            System.out.printf("Choose the ID of the Password you wish to delete.\n->");
+            EditID = Scanner.nextInt();
+
+            if (EditID >= 0) {
+                ClearScreen();
+                System.out.printf("---------------Delete Password---------------\n");
+                System.out.printf("Are you sure you want to delete this passowrd()?\n1- Yes\n2- No\n->"/*, matrix[EditID,2]*/);
+                DelPassword = Scanner.nextInt();
+            }
+        }
     }
 
     static void Exit() {
+        ClearScreen();
         System.out.println("---------------Exit App---------------\n");
+        System.out.printf("GoodBye :)");
         
     }
 
