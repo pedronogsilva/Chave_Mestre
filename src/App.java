@@ -20,6 +20,7 @@ I go to the bathroom fazer pipi.
 */
 
 //import of all the libraries needed for the project
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -27,9 +28,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.lang.model.type.NullType;
 // import com.google.gson.Gson;
+import javax.sound.midi.SysexMessage;
 
 
 public class App { 
+    //Variables
     static File DBFile = new File("PassWords.json");
     static int MaxSize;//the maximum size of the matrix on this exact instance of the code since the maximum amount of passowrd is dynamic. 
 
@@ -39,6 +42,7 @@ public class App {
     static String PassWord = "";
     static int EditID = 0; //temp
     static int DelPassword = 0;
+    static ArrayList<ArrayList<String>> bd= new ArrayList<>();
 
     
     static void Start() {
@@ -51,46 +55,54 @@ public class App {
     }
 
     static void AddPassword() {
+        ArrayList<String> entrada  = new ArrayList<>();
 
-        while (AppSite == "") {
             //Open the menu the adding and ask app or site
             ClearScreen();
             System.out.println("---------------Adding Password---------------\n");
             System.out.printf("What is the app or website\n->");
+            Scanner.nextLine();
             AppSite = Scanner.nextLine();
-        }
+            entrada.add(AppSite);
 
         //Ask waht type login is, it´s username.. or quick login
         ClearScreen();
         System.out.printf("---------------Adding Password---------------\n");
         System.out.printf("What type of login?\n1- Username/Email, Password\n2- Google, Facebook, etc\n->");
-        int TypeLogin = Scanner.nextInt();
+        String TypeLogin = Scanner.nextLine();
+        entrada.add(TypeLogin);
+        
+
         
         switch (TypeLogin) {
-            case 1:
+            case "1":
                 //ask the username or email for login and save in "UserEmail"
-                while (UserEmail == "") {
                     ClearScreen();
                     System.out.printf("---------------Adding Password---------------\n");
                     System.out.printf("Username/Email:\n->");
                     UserEmail = Scanner.nextLine();
+                    entrada.add(UserEmail);
+
+                    System.out.printf("%s, teste Hello World!!", UserEmail);
 
                     //Ask the password and save in "PassWord"
                     if (UserEmail != "" && PassWord == "") {
                         System.out.printf("Password:\n->");
                         PassWord = Scanner.nextLine();
+                        entrada.add(PassWord);
                     } 
-                }
+                
 
                 break;
 
-            case 2:
-                //Ask the quick login and save in the "PassWord"
-                while (PassWord == "") {
+            case "2":
+                //Ask the quick login and save in the "username"
+                while (UserEmail == "") {
                     ClearScreen();
                     System.out.printf("---------------Adding Password---------------\n");
                     System.out.printf("What's the quick login?\n->");
-                    PassWord = Scanner.nextLine();
+                    UserEmail = Scanner.nextLine();
+                    entrada.add(UserEmail);
                 }
 
                 break;
@@ -99,10 +111,15 @@ public class App {
                 System.out.printf("Invalid Option! Please try again.\n");
                 break;
         }
+        bd.add(entrada);
     }
 
     static void ViewPassword() {
         System.out.println("---------------View Passwords---------------\n");
+        System.out.print(bd);
+        System.out.printf("\nPress Enter to return to the main menu...");
+        Scanner.nextLine();
+        Scanner.nextLine();
 
     }
 
@@ -159,10 +176,10 @@ public class App {
         // System.out.print("---------------Password Manager App ---------------\n");
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {        
         int Option;
+
         Start();
-        
 
         while (true) {
             ClearScreen();
