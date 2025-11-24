@@ -91,24 +91,19 @@ public class App {
                     entrada.add(UserEmail);
 
                     //Ask the password and save in "PassWord"
-                    if (UserEmail != "" && PassWord == "") {
                         System.out.printf("Password:\n->");
                         PassWord = Scanner.nextLine();
-                        entrada.add(PassWord);
-                    } 
-                
+                        entrada.add(PassWord);               
 
                 break;
 
             case "2":
                 //Ask the quick login and save in the "username"
-                while (UserEmail == "") {
                     ClearScreen();
                     System.out.printf("---------------Adding Password---------------\n");
                     System.out.printf("What's the quick login?\n->");
                     UserEmail = Scanner.nextLine();
                     entrada.add(UserEmail);
-                }
 
                 break;
 
