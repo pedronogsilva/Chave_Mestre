@@ -130,6 +130,7 @@ public class App {
             ClearScreen();
             System.out.printf("---------------Edit Password---------------\n");
             System.out.printf("Choose the ID of the Password you wish to edit.\n->");
+            //Scanner.nextInt();
             EditID = Scanner.nextInt();
             
             if (EditID >= 0) { 
@@ -137,7 +138,7 @@ public class App {
                 ClearScreen();
                 System.out.printf("---------------Edit Password---------------\n");
                 System.out.printf("Password:\n->");
-                Scanner.nextLine();
+                //Scanner.nextLine();
                 PassWord = Scanner.nextLine();
             }
         }

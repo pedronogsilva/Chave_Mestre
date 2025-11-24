@@ -54,7 +54,6 @@ Menu:
         Qual Password quer apagar, ID?
     ->
 
-
 ---------------Exit App---------------
 
-    1-Confirm Exit
+    1- Confirm Exit
