@@ -32,7 +32,15 @@ import javax.sound.midi.SysexMessage;
 
 
 public class App { 
+    //Matrix positions
+    static final int id = 0;
+    static final int appsite = 1;
+    static final int typelogin = 2;
+    static final int usernameemail = 3;
+    static final int password = 4;
     //Variables
+
+
     static File DBFile = new File("PassWords.json");
     static int MaxSize;//the maximum size of the matrix on this exact instance of the code since the maximum amount of passowrd is dynamic. 
 
@@ -61,7 +69,6 @@ public class App {
             ClearScreen();
             System.out.println("---------------Adding Password---------------\n");
             System.out.printf("What is the app or website\n->");
-            Scanner.nextLine();
             AppSite = Scanner.nextLine();
             entrada.add(AppSite);
 
@@ -82,8 +89,6 @@ public class App {
                     System.out.printf("Username/Email:\n->");
                     UserEmail = Scanner.nextLine();
                     entrada.add(UserEmail);
-
-                    System.out.printf("%s, teste Hello World!!", UserEmail);
 
                     //Ask the password and save in "PassWord"
                     if (UserEmail != "" && PassWord == "") {
@@ -119,7 +124,6 @@ public class App {
         System.out.print(bd);
         System.out.printf("\nPress Enter to return to the main menu...");
         Scanner.nextLine();
-        Scanner.nextLine();
 
     }
 
@@ -130,15 +134,14 @@ public class App {
             ClearScreen();
             System.out.printf("---------------Edit Password---------------\n");
             System.out.printf("Choose the ID of the Password you wish to edit.\n->");
-            //Scanner.nextInt();
             EditID = Scanner.nextInt();
+            Scanner.nextLine();
             
             if (EditID >= 0) { 
                 //Change the old password for the new password
                 ClearScreen();
                 System.out.printf("---------------Edit Password---------------\n");
                 System.out.printf("Password:\n->");
-                //Scanner.nextLine();
                 PassWord = Scanner.nextLine();
             }
         }
@@ -152,19 +155,20 @@ public class App {
             System.out.printf("---------------Delete Password---------------\n");
             System.out.printf("Choose the ID of the Password you wish to delete.\n->");
             EditID = Scanner.nextInt();
+            Scanner.nextLine();
 
             if (EditID >= 0) {
                 ClearScreen();
                 System.out.printf("---------------Delete Password---------------\n");
                 System.out.printf("Are you sure you want to delete this passowrd()?\n1- Yes\n2- No\n->"/*, matrix[EditID,2]*/);
                 DelPassword = Scanner.nextInt();
+                Scanner.nextLine();
             }
         }
     }
 
     static void Exit() {
         ClearScreen();
-        System.out.println("---------------Exit App---------------\n");
         System.out.printf("GoodBye :)");
         
     }
@@ -189,6 +193,7 @@ public class App {
             System.out.printf("---------------Password Manager App---------------\n");
             System.out.printf("1 - Add Password\n2 - View Password\n3 - Edit Password\n4 - Delete Password\n5 - Exit App\n->");
             Option = Scanner.nextInt();
+            Scanner.nextLine();
 
             switch (Option) {
                 case 1:
