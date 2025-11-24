@@ -33,11 +33,10 @@ import javax.sound.midi.SysexMessage;
 
 public class App { 
     //Matrix positions
-    static final int id = 0;
-    static final int appsite = 1;
-    static final int typelogin = 2;
-    static final int usernameemail = 3;
-    static final int password = 4;
+    static final int site = 0;
+    static final int login = 1;
+    static final int user = 2;
+    static final int pass = 3;
     //Variables
 
 
@@ -115,11 +114,23 @@ public class App {
     }
 
     static void ViewPassword() {
+        
+        ClearScreen();
+        System.out.println("---------------View Passwords---------------\n");
+        for (int i = 0; i < bd.size();i++){
+            if (bd.get(i).get(login).equals("1")){            
+                System.out.printf("\nSite: %s\tUser: %s\tPassWord: %s\t",bd.get(i).get(site),bd.get(i).get(user),bd.get(i).get(pass));
+            }else{
+                System.out.printf("\nSite: %s\tLogin Rápido: %s", bd.get(i).get(site), bd.get(i).get(user));
+            }
+        }
+        
+        /*
         System.out.println("---------------View Passwords---------------\n");
         System.out.print(bd);
-        System.out.printf("\nPress Enter to return to the main menu...");
+        */
+        System.out.printf("\n\n\nPress Enter to return to the main menu...");
         Scanner.nextLine();
-
     }
 
     static void EditPassword() {
