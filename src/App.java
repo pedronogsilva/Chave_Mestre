@@ -42,11 +42,8 @@ public class App {
 
     static File DBFile = new File("PassWords.json");
     static int MaxSize;//the maximum size of the matrix on this exact instance of the code since the maximum amount of passowrd is dynamic. 
-    
-    static int EditID;
 
     static Scanner Scanner = new Scanner(System.in);
-    static int DelPassword = 0;
     static ArrayList<ArrayList<String>> bd= new ArrayList<>();
 
     
@@ -151,22 +148,6 @@ public class App {
 
     static void DelPassword() {
 
-        while (EditID == 0) {
-            //Ask what ID whant to delete
-            ClearScreen();
-            System.out.printf("---------------Delete Password---------------\n");
-            System.out.printf("Choose the ID of the Password you wish to delete.\n->");
-            EditID = Scanner.nextInt();
-            Scanner.nextLine();
-
-            if (EditID >= 0) {
-                ClearScreen();
-                System.out.printf("---------------Delete Password---------------\n");
-                System.out.printf("Are you sure you want to delete this passowrd()?\n1- Yes\n2- No\n->"/*, matrix[EditID,2]*/);
-                DelPassword = Scanner.nextInt();
-                Scanner.nextLine();
-            }
-        }
     }
 
     static void Exit() {
