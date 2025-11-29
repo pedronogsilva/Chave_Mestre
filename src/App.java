@@ -42,12 +42,10 @@ public class App {
 
     static File DBFile = new File("PassWords.json");
     static int MaxSize;//the maximum size of the matrix on this exact instance of the code since the maximum amount of passowrd is dynamic. 
+    
+    static int EditID;
 
     static Scanner Scanner = new Scanner(System.in);
-    static String AppSite = "";
-    static String UserEmail = "";
-    static String PassWord = "";
-    static int EditID = 0; //temp
     static int DelPassword = 0;
     static ArrayList<ArrayList<String>> bd= new ArrayList<>();
 
@@ -63,37 +61,35 @@ public class App {
 
     static void AddPassword() {
         ArrayList<String> entrada  = new ArrayList<>();
+        String add;
 
-            //Open the menu the adding and ask app or site
-            ClearScreen();
-            System.out.println("---------------Adding Password---------------\n");
-            System.out.printf("What is the app or website\n->");
-            AppSite = Scanner.nextLine();
-            entrada.add(AppSite);
+        //Open the menu the adding and ask app or site
+        ClearScreen();
+        System.out.println("---------------Adding Password---------------\n");
+        System.out.printf("What is the app or website\n->");
+        add = Scanner.nextLine();
+        entrada.add(add);
 
         //Ask waht type login is, it´s username.. or quick login
         ClearScreen();
         System.out.printf("---------------Adding Password---------------\n");
         System.out.printf("What type of login?\n1- Username/Email, Password\n2- Google, Facebook, etc\n->");
-        String TypeLogin = Scanner.nextLine();
-        entrada.add(TypeLogin);
+        add = Scanner.nextLine();
+        entrada.add(add);
         
-
-        
-        switch (TypeLogin) {
+        switch (add) {
             case "1":
                 //ask the username or email for login and save in "UserEmail"
-                    ClearScreen();
-                    System.out.printf("---------------Adding Password---------------\n");
-                    System.out.printf("Username/Email:\n->");
-                    UserEmail = Scanner.nextLine();
-                    entrada.add(UserEmail);
+                ClearScreen();
+                System.out.printf("---------------Adding Password---------------\n");
+                System.out.printf("Username/Email:\n->");
+                add = Scanner.nextLine();
+                entrada.add(add);
 
-                    //Ask the password and save in "PassWord"
-                        System.out.printf("Password:\n->");
-                        PassWord = Scanner.nextLine();
-                        entrada.add(PassWord);               
-
+                //Ask the password and save in "PassWord"
+                System.out.printf("Password:\n->");
+                add = Scanner.nextLine();
+                entrada.add(add);
                 break;
 
             case "2":
@@ -101,9 +97,8 @@ public class App {
                     ClearScreen();
                     System.out.printf("---------------Adding Password---------------\n");
                     System.out.printf("What's the quick login?\n->");
-                    UserEmail = Scanner.nextLine();
-                    entrada.add(UserEmail);
-
+                    add = Scanner.nextLine();
+                    entrada.add(add);
                 break;
 
             default:
@@ -114,15 +109,12 @@ public class App {
     }
 
     static void ViewPassword() {
-        
         ClearScreen();
         System.out.println("---------------View Passwords---------------\n");
         for (int i = 0; i < bd.size();i++){
             if (bd.get(i).get(login).equals("1")){            
                 System.out.printf("\nSite: %s\tUser: %s\tPassWord: %s\t",bd.get(i).get(site),bd.get(i).get(user),bd.get(i).get(pass));
-            }else{
-                System.out.printf("\nSite: %s\tLogin Rápido: %s", bd.get(i).get(site), bd.get(i).get(user));
-            }
+            }else{System.out.printf("\nSite: %s\tLogin Rápido: %s", bd.get(i).get(site), bd.get(i).get(user));}
         }
         
         /*
@@ -134,23 +126,27 @@ public class App {
     }
 
     static void EditPassword() {
+        String Edit;
+        int i = 0; 
 
-        while (EditID == 0) {
-            //Ask what ID whant to edit, change for ID and not user/email or password
-            ClearScreen();
-            System.out.printf("---------------Edit Password---------------\n");
-            System.out.printf("Choose the ID of the Password you wish to edit.\n->");
-            EditID = Scanner.nextInt();
-            Scanner.nextLine();
-            
-            if (EditID >= 0) { 
-                //Change the old password for the new password
-                ClearScreen();
-                System.out.printf("---------------Edit Password---------------\n");
-                System.out.printf("Password:\n->");
-                PassWord = Scanner.nextLine();
-            }
+        //Ask what ID whant to edit, change for ID and not user/email or password
+        ClearScreen();
+        System.out.printf("---------------Edit Password---------------\n");
+        System.out.printf("Choose the name of the site/app you wish to edit.\n->");
+        Edit = Scanner.nextLine();
+        
+        //get the matrix line for the specific password
+        while(!bd.get(i).get(site).equals(Edit)){
+            i++;
         }
+
+        //Change the old password for the new password
+        ClearScreen();
+        System.out.printf("---------------Edit Password---------------\n");
+        System.out.printf("Old PassWord:  %s\n", bd.get(i).get(pass));
+        System.out.printf("New PassWord:\n->");
+        Edit = Scanner.nextLine();
+        bd.get(i).set(pass, Edit);
     }
 
     static void DelPassword() {
@@ -176,15 +172,16 @@ public class App {
     static void Exit() {
         ClearScreen();
         System.out.printf("GoodBye :)");
-        
     }
 
     static void ClearScreen() {
         // Clear the console screen and print the app header
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    static void GeneratePassword(){
         
-        // System.out.print("---------------Password Manager App ---------------\n");
     }
 
     public static void main(String[] args) throws Exception {        
@@ -197,7 +194,7 @@ public class App {
 
             // Application main menu
             System.out.printf("---------------Password Manager App---------------\n");
-            System.out.printf("1 - Add Password\n2 - View Password\n3 - Edit Password\n4 - Delete Password\n5 - Exit App\n->");
+            System.out.printf("1 - Add Password\n2 - View Password\n3 - Edit Password\n4 - Generate PassWord\n5 - Exit App\n->");
             Option = Scanner.nextInt();
             Scanner.nextLine();
 
@@ -219,7 +216,10 @@ public class App {
                     break;
                 case 5:
                     Exit();
-                    return ;
+                    return;
+                case 6:
+                    GeneratePassword();
+                    break;
                 default:
                     System.out.printf("Invalid Option! Please try again.\n");
                     break;
