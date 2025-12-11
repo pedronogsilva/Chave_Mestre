@@ -1,4 +1,23 @@
 /*
+public class Main
+{
+	public static void main(String[] args) {
+		SecureRandom random = new SecureRandom();
+		StringBuilder password = new StringBuilder(tamanho);
+		
+		for (int i = 0; i<tamanho;i++){
+	        int posição = random.nextInt(ALL.length());
+		    
+		    password.append(ALL.charAt(posição));
+		}
+		
+		System.out.printf("%s", password);
+	}
+}
+*/
+
+
+/*
 This code consists of a password manger app via Command Line Interface.
 Starting Date: 15/11/2025 - Finish Date: "ongoing"
 
@@ -7,28 +26,23 @@ Versions: 0.1.2 - Initial version. 16/11/2025
 In this version, we have to implement:
 -Matrizes;
 -If;✓
--For;
+-For; ✓
 -While; ✓
 -Functions; ✓
--Tipo variavel;
--long;
--random;
--file handling;
--"infinite" matrix;
+-Tipo variavel; ✓
+-long; ✓-
+-random; ✓
+-file handling; 
+-"infinite" matrix; ✓
 
 I go to the bathroom fazer pipi.
 */
 
 //import of all the libraries needed for the project
+import java.io.File;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.lang.model.type.NullType;
-// import com.google.gson.Gson;
-import javax.sound.midi.SysexMessage;
 
 
 public class App { 
@@ -161,8 +175,26 @@ public class App {
         System.out.flush();
     }
 
-    static void GeneratePassword(){
-        
+    static void GeneratePassword() {
+    final int tamanho = 10;
+    final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    final String LOWER = "abcdefghijklmnopqrstuvwxyz";
+    final String DIGITS = "0123456789";
+    final String SYMBOLS = "!@#$%^&*()-_=+<>?";
+    
+    final String ALL = UPPER + LOWER + DIGITS + SYMBOLS;
+    SecureRandom random = new SecureRandom();
+	StringBuilder password = new StringBuilder(tamanho);
+
+    for (int i = 0; i<tamanho;i++){
+	        int posição = random.nextInt(ALL.length());
+		    
+		    password.append(ALL.charAt(posição));
+		}
+		
+		System.out.printf("%s", password);
+        Scanner.nextLine();
+        Scanner.nextLine();
     }
 
     public static void main(String[] args) throws Exception {        
@@ -210,5 +242,5 @@ public class App {
 }
 
 /*  
-Developers, Gil Pereira and Pedro Silva
+Developers, Gil Pereira 250000826 and Pedro Silva 250000941
 */
